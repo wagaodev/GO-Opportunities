@@ -2,8 +2,6 @@ package handler
 
 import (
 	"fmt"
-
-	"github.com/go-playground/validator/v10"
 )
 
 func errParamIsRequired(name, typ string) error {
@@ -20,12 +18,26 @@ type CreateOpeningRequest struct {
 }
 
 func (r *CreateOpeningRequest) Validate() error {
-	validate := validator.New()
-	err := validate.Struct(r)
-	if err != nil {
-		for _, err := range err.(validator.ValidationErrors) {
-			return errParamIsRequired(err.Field(), err.Tag())
-		}
+	if r.Role == "" && r.Company == "" && r.Location == "" && r.Link == "" && r.Remote == nil && r.Salary <= 0 {
+		return fmt.Errorf("request body is empty or malformated")
+	}
+	if r.Role == "" {
+		return errParamIsRequired("role", "string")
+	}
+	if r.Company == "" {
+		return errParamIsRequired("company", "string")
+	}
+	if r.Location == "" {
+		return errParamIsRequired("location", "string")
+	}
+	if r.Link == "" {
+		return errParamIsRequired("link", "string")
+	}
+	if r.Remote == nil {
+		return errParamIsRequired("remote", "bool")
+	}
+	if r.Salary <= 0 {
+		return errParamIsRequired("salary", "int64")
 	}
 	return nil
 }
