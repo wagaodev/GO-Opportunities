@@ -13,7 +13,7 @@ func CreateOpeningHandler(ctx *gin.Context) {
 	ctx.BindJSON(&request)
 
 	if err := request.Validate(); err != nil {
-		logger.Errorf("validaition error: %v", err.Error())
+		logger.Errorf("validation error: %v", err.Error())
 		sendError(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
@@ -27,9 +27,9 @@ func CreateOpeningHandler(ctx *gin.Context) {
 		Salary:   request.Salary,
 	}
 
-	if err := db.Create(&request).Error; err != nil {
+	if err := db.Create(&opening).Error; err != nil {
 		logger.Errorf("error creating opening: %v", err.Error())
-		sendError(ctx, http.StatusInternalServerError, "Error creating opening on database")
+		sendError(ctx, http.StatusInternalServerError, "error creating opening on database")
 		return
 	}
 
