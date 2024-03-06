@@ -35,7 +35,8 @@ For more details, refer to the Makefile in the project directory.
 
 ### Swagger
 
-<img src="https://imgur.com/tDjbMnr" alt="Swagger" width="400" height="400">
+![Captura de Tela 2024-03-06 às 01 39 16](https://github.com/wagaodev/GO-Opportunities/assets/66399640/390b2185-a66e-4f95-9933-f9f6285381e6)
+
 
 ## Contributing 🤝
 
