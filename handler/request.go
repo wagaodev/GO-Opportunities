@@ -57,5 +57,5 @@ func (r *UpdateOpeningRequest) Validate() error {
 		return nil
 	}
 	// if none of the fields were provided, return falsy.
-	return fmt.Errorf("At least one valid field must be provided")
+	return fmt.Errorf("at least one valid field must be provided")
 }
