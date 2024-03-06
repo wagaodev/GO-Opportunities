@@ -16,50 +16,6 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/opening": {
-            "get": {
-                "description": "create a new job opening",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Openings"
-                ],
-                "summary": "Create opening",
-                "parameters": [
-                    {
-                        "description": "Request body",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/handler.CreateOpeningRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handler.CreateOpeningResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
-                        }
-                    }
-                }
-            },
             "post": {
                 "description": "create a new job opening",
                 "consumes": [
@@ -103,6 +59,48 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "delete": {
+                "description": "delete a new job opening",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Openings"
+                ],
+                "summary": "Delete opening",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Opening identification",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.DeleteOpeningResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    }
+                }
             }
         }
     },
@@ -131,6 +129,17 @@ const docTemplate = `{
             }
         },
         "handler.CreateOpeningResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schemas.OpeningResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.DeleteOpeningResponse": {
             "type": "object",
             "properties": {
                 "data": {
